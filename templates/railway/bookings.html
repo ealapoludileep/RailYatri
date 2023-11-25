@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %} Train Bookings {% endblock %}</h1>
+{% endblock %} {% block content %}
+<form method="post">
+  <label for="first_name">Fist Name</label>
+  <input
+    name="first_name"
+    id="first_name"
+    value="{{ request.form['first_name'] }}"
+    required
+    placeholder="Please enter the first name of the passanger"
+  />
+  <label for="last_name">Last Name</label>
+  <input
+    name="last_name"
+    id="last_name"
+    value="{{ request.form['last_name'] }}"
+    required
+    placeholder="Please enter the last name of the passanger"
+  />
+  <input type="submit" value="Search" />
+</form>
+{% for train in trains %}
+<div>{{train.train_name}}</div>
+{% endfor %} {% endblock %}
