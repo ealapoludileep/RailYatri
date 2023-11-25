@@ -24,13 +24,13 @@ def create_app(test_config=None):
     def hello():
         return "Hello World"
 
-    # @app.route('/')
-    # def index():
-    #     return render_template('base.html')
+    @app.route('/')
+    def index():
+        return render_template('railway/index.html')
 
     db.init_app(app)
     app.register_blueprint(railway.bp)
-    app.add_url_rule('/', endpoint='index')
+    # app.add_url_rule('/', endpoint='railway.index')
     # flask --app flaskr init-db
 
     return app

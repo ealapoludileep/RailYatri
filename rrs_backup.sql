@@ -70,11 +70,11 @@ CREATE TABLE Trains (
     source_station VARCHAR(255) NOT NULL,
     destination_station VARCHAR(255) NOT NULL
 );
-INSERT INTO "Trains" VALUES(1,' Orient Express ',800,600,' Paris',' Istanbul');
-INSERT INTO "Trains" VALUES(2,' Flying Scottsman',4000,3500,' Edinburgh',' London');
-INSERT INTO "Trains" VALUES(3,' Golden Arrow ',980,860,' Victoria',' Dover');
-INSERT INTO "Trains" VALUES(4,' Golden Chariot',4300,3800,' Bangalore',' Goa');
-INSERT INTO "Trains" VALUES(5,' Maharaja Express',5980,4510,' Delhi',' Mumbai');
+INSERT INTO "Trains" VALUES(1,'Orient Express',800,600,'Paris','Istanbul');
+INSERT INTO "Trains" VALUES(2,'Flying Scottsman',4000,3500,'Edinburgh','London');
+INSERT INTO "Trains" VALUES(3,'Golden Arrow',980,860,'Victoria','Dover');
+INSERT INTO "Trains" VALUES(4,'Golden Chariot',4300,3800,'Bangalore','Goa');
+INSERT INTO "Trains" VALUES(5,'Maharaja Express',5980,4510,'Delhi','Mumbai');
 CREATE TABLE Trains_Status (
     train_date datetime NOT NULL,
     train_name VARCHAR(255) NOT NULL,
@@ -85,11 +85,11 @@ CREATE TABLE Trains_Status (
     CONSTRAINT compositeKey PRIMARY KEY (train_date, train_name),
     FOREIGN KEY (train_name) REFERENCES Trains(train_name)
 );
-INSERT INTO "Trains_Status" VALUES('2022-02-19',' Orient Express',10,10,0,0);
-INSERT INTO "Trains_Status" VALUES('2022-02-20',' Flying Scottsman',8,5,2,5);
-INSERT INTO "Trains_Status" VALUES('2022-02-21',' Maharaja Express',7,6,3,4);
-INSERT INTO "Trains_Status" VALUES('2022-02-21',' Golden Chariot',6,3,4,7);
+INSERT INTO "Trains_Status" VALUES('2022-02-19','Orient Express',10,10,0,0);
+INSERT INTO "Trains_Status" VALUES('2022-02-20','Flying Scottsman',8,5,2,5);
+INSERT INTO "Trains_Status" VALUES('2022-02-21','Maharaja Express',7,6,3,4);
+INSERT INTO "Trains_Status" VALUES('2022-02-21','Golden Chariot',6,3,4,7);
 INSERT INTO "Trains_Status" VALUES('2022-02-22','Golden Arrow',8,7,2,3);
 INSERT INTO "Trains_Status" VALUES('2022-03-10','Golden Arrow',8,5,2,5);
-INSERT INTO "Trains_Status" VALUES('2022-02-21',' Flying Scottsman',5,5,5,5);
+INSERT INTO "Trains_Status" VALUES('2022-02-21','Flying Scottsman',5,5,5,5);
 COMMIT;

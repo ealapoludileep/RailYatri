@@ -12,8 +12,17 @@
     <nav>
       <h1>Rail Yatri</h1>
       <ul>
-        <li><a href="{{ url_for('railway.booked_trains') }}">Trains</a></li>
-        <li>Train Status</li>
+        <li>
+          <a href="{{ url_for('railway.booked_trains') }}">Train Bokkings</a>
+        </li>
+        <li>
+          <a href="{{ url_for('railway.get_confirmed_passengers')}}"
+            >Confiremed Tickets</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('railway.get_train_status')}}">Trains Status</a>
+        </li>
         <li>Passengers</li>
         <li>Booking Status</li>
         {# {% if g.user %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %} Trains Status {% endblock %}</h1>
+{% endblock %} {% block content %} {% for date,train_list in trains.items() %}
+<h3>{{date}}</h3>
+{% for train in train_list %}
+<div>
+  <b>Train Name:</b> {{train.train_name}} |
+  <b>passenger Count:</b> {{train.premium_seats_occupied +
+  train.general_seats_occupied}}
+</div>
+{% endfor %} {% endfor %} {% endblock %}

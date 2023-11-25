@@ -1,60 +1,103 @@
-DROP TABLE IF EXISTS Trains;
-DROP TABLE IF EXISTS Trains_Status;
-DROP TABLE IF EXISTS Passengers;
-DROP TABLE IF EXISTS Bookings;
-
-CREATE TABLE Trains (
-    train_number INT AUTO_INCREMENT PRIMARY KEY,
-    train_name VARCHAR(255) NOT NULL UNIQUE,
-    premium_fair INT NOT NULL,
-    general_fair INT NOT NULL,
-    source_station VARCHAR(255) NOT NULL,
-    destination_station VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Trains_Status (
-    train_date datetime NOT NULL,
-    train_name VARCHAR(255) NOT NULL,
-    premium_seats_available INT NOT NULL,
-    general_seats_available INT NOT NULL,
-    premium_seats_occupied INT NOT NULL,
-    general_seats_occupied INT NOT NULL,
-    CONSTRAINT compositeKey PRIMARY KEY (train_date, train_name),
-    FOREIGN KEY (train_name) REFERENCES Trains(train_name)
-);
-
-CREATE TABLE Passengers (
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    address VARCHAR(255),
-    city VARCHAR(255),
-    county VARCHAR(255),
-    phone VARCHAR(255),
-    ssn VARCHAR(255) PRIMARY KEY NOT NULL,
-    bdate datetime NOT NULL
-);
-
-CREATE TABLE Bookings (
-    passanger_ssn VARCHAR(255) NOT NULL,
-    train_Number INT NOT NULL,
-    ticket_Type VARCHAR(255) NOT NULL,
-    staus VARCHAR(255) NOT NULL,
-    FOREIGN KEY (passanger_ssn) REFERENCES Passengers(ssn),
-    FOREIGN KEY (train_Number) REFERENCES Trains(train_number)
-);
-INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(1, Orient Express ,800.0,600.0, Paris, Istanbul);
-INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(2, Flying Scottsman,4000.0,3500.0, Edinburgh, London);
-INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(3, Golden Arrow ,980.0,860.0, Victoria, Dover);
-INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(4, Golden Chariot,4300.0,3800.0, Bangalore, Goa);
-INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(5, Maharaja Express,5980.0,4510.0, Delhi, Mumbai);
+DROP TABLE IF EXISTS Trains;
 
-INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-19, Orient Express,10,10,0,0);
-INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-20, Flying Scottsman,8,5,2,5);
-INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21, Maharaja Express,7,6,3,4);
-INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21, Golden Chariot,6,3,4,7);
+DROP TABLE IF EXISTS Trains_Status;
+
+DROP TABLE IF EXISTS Passengers;
+
+DROP TABLE IF EXISTS Bookings;
+
+
+
+CREATE TABLE Trains (
+
+    train_number INT AUTO_INCREMENT PRIMARY KEY,
+
+    train_name VARCHAR(255) NOT NULL UNIQUE,
+
+    premium_fair INT NOT NULL,
+
+    general_fair INT NOT NULL,
+
+    source_station VARCHAR(255) NOT NULL,
+
+    destination_station VARCHAR(255) NOT NULL
+
+);
+
+
+
+CREATE TABLE Trains_Status (
+
+    train_date datetime NOT NULL,
+
+    train_name VARCHAR(255) NOT NULL,
+
+    premium_seats_available INT NOT NULL,
+
+    general_seats_available INT NOT NULL,
+
+    premium_seats_occupied INT NOT NULL,
+
+    general_seats_occupied INT NOT NULL,
+
+    CONSTRAINT compositeKey PRIMARY KEY (train_date, train_name),
+
+    FOREIGN KEY (train_name) REFERENCES Trains(train_name)
+
+);
+
+
+
+CREATE TABLE Passengers (
+
+    first_name VARCHAR(255) NOT NULL,
+
+    last_name VARCHAR(255) NOT NULL,
+
+    address VARCHAR(255),
+
+    city VARCHAR(255),
+
+    county VARCHAR(255),
+
+    phone VARCHAR(255),
+
+    ssn VARCHAR(255) PRIMARY KEY NOT NULL,
+
+    bdate datetime NOT NULL
+
+);
+
+
+
+CREATE TABLE Bookings (
+
+    passanger_ssn VARCHAR(255) NOT NULL,
+
+    train_Number INT NOT NULL,
+
+    ticket_Type VARCHAR(255) NOT NULL,
+
+    staus VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (passanger_ssn) REFERENCES Passengers(ssn),
+
+    FOREIGN KEY (train_Number) REFERENCES Trains(train_number)
+
+);
+INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(1,Orient Express,800.0,600.0,Paris,Istanbul);
+INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(2,Flying Scottsman,4000.0,3500.0,Edinburgh,London);
+INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(3,Golden Arrow,980.0,860.0,Victoria,Dover);
+INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(4,Golden Chariot,4300.0,3800.0,Bangalore,Goa);
+INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(5,Maharaja Express,5980.0,4510.0,Delhi,Mumbai);
+
+INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-19,Orient Express,10,10,0,0);
+INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-20,Flying Scottsman,8,5,2,5);
+INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21,Maharaja Express,7,6,3,4);
+INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21,Golden Chariot,6,3,4,7);
 INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-22,Golden Arrow,8,7,2,3);
 INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-03-10,Golden Arrow,8,5,2,5);
-INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21, Flying Scottsman,5,5,5,5);
+INSERT INTO Trains_Status(train_date,train_name,premium_seats_available,general_seats_available,premium_seats_occupied,general_seats_occupied) VALUES(2022-02-21,Flying Scottsman,5,5,5,5);
 
 INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES (James,Butt,6649 N Blue Gum St,New Orleans,Orleans,504-845-1427,264816896,2068-10-10 00:00:00);
 INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES (Josephine,Darakjy,4 B Blue Ridge Blvd,Brighton,Livingston,810-374-9840,240471168,1975-11-01 00:00:00);

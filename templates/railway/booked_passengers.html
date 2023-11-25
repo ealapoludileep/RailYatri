@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %} Confirmed Passengers List {% endblock %}</h1>
+{% endblock %} {% block content %}
+<form method="post">
+  <label for="date">Fist Name</label>
+  <input
+    name="date"
+    id="date"
+    value="{{ date }}"
+    required
+    type="date"
+    max="{{max_date}}"
+  />
+  <input type="submit" value="Search" />
+</form>
+{% if passengers|length >= 1 %} {% for passenger in passengers %}
+<div>
+  <b>Name:</b> {{passenger.first_name}} {{passenger.last_name}} |
+  <b>Train: </b> {{passenger.train_name}} | <b>Date: </b> {{date}} |
+  <b>Status: </b> {{passenger.staus}}
+</div>
+{% endfor %} {% else %}
+<div>There are no passangers on {{date}}</div>
+{% endif %} {% endblock %}
