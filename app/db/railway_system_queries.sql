@@ -52,4 +52,8 @@ CREATE TABLE Bookings (
 
 -- SELECT * FROM Passengers AS p INNER JOIN (SELECT * FROM Bookings AS b INNER JOIN Trains as t ON b.train_number = t.train_number) AS b ON p.ssn = b.passanger_ssn and b.train_Number in (SELECT train_number FROM Trains WHERE train_name in (SELECT train_name FROM Trains_Status WHERE train_date = '2022-02-22')) and b.status != 'WaitL';
 
-SELECT * FROM Trains AS t INNER JOIN Trains_Status AS ts ON t.train_name = ts.train_name GROUP BY ts.train_date ORDER BY train_date;
+-- SELECT * FROM Trains AS t INNER JOIN Trains_Status AS ts ON t.train_name = ts.train_name GROUP BY ts.train_date ORDER BY train_date;
+
+-- SELECT DISTINCT(train_name) FROM Trains;
+
+SELECT * FROM Bookings AS b INNER JOIN Passengers AS p ON b.passanger_ssn = p.ssn WHERE b.train_Number in (SELECT train_number FROM Trains WHERE train_name = 'Golden Chariot') AND b.staus = 'Booked' ORDER BY b.train_number;

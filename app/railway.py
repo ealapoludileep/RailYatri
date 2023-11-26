@@ -58,3 +58,16 @@ def get_train_status():
             trains_dict[str(train['train_date'])].append(train)
 
     return render_template('railway/trains.html', trains=trains_dict)
+
+
+@bp.route('/train_passengers', methods=['POST', 'GET'])
+def get_train_passengers():
+    db = get_db()
+    trains = db.execute('SELECT DISTINCT(train_name) FROM Trains;').fetchall()
+    train_name = dict(trains[0])['train_name']
+    print(train_name)
+    if request.method == 'POST':
+        train_name = request.form['train_name']
+    train_passengers = db.execute(
+        "SELECT * FROM Bookings AS b INNER JOIN Passengers AS p ON b.passanger_ssn = p.ssn WHERE b.train_Number in (SELECT train_number FROM Trains WHERE train_name = ?) AND b.staus = 'Booked' ORDER BY p.first_name;", (train_name,)).fetchall()
+    return render_template('railway/train_passengers.html', train_name=train_name, trains=trains, train_passengers=train_passengers)
