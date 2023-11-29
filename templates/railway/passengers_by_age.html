@@ -1,3 +1,42 @@
 {% extends 'base.html' %} {% block header %}
 <h1>{% block title %} Passengers By Age {% endblock %}</h1>
-{% endblock %} {% block content %}{% endblock %}
+{% endblock %} {% block content %}
+<div>Age Range</div>
+<form method="post">
+  <label for="age_from">From</label>
+  <input
+    name="age_from"
+    id="age_from"
+    value="{{ age_from }}"
+    required
+    placeholder="0-99"
+    type="number"
+  />
+  <label for="age_to">To</label>
+  <input
+    name="age_to"
+    id="age_to"
+    value="{{ age_to }}"
+    required
+    placeholder="0-99"
+    type="number"
+  />
+  <div id="inputError"></div>
+  <input type="submit" value="Search" id="seach_button" disabled />
+</form>
+{% for passanger in passengers %}
+<div>
+  <b>Train Number: </b> {{passanger.train_number}} |
+  <b>Train Name: </b> {{passanger.train_name}} |
+  <b>Source station:</b> {{passanger.source_station}} |
+  <b>Destination Station:</b> {{passanger.destination_station}} |
+  <b>Passenger Name: </b> {{passanger.first_name}} {{passanger.last_name}} |
+  <b>Passenger address: </b> {{passanger.address}} |
+  <b>Ticket Categpry: </b> {{passanger.category}} |
+  <b>Ticket Status:</b> {{passanger.status}}
+  <b>Passenger Age:</b> {{passanger.age}}
+  <hr />
+</div>
+{% endfor %} {% endblock %} {% block javascript %}
+<script src="{{url_for('static', filename='js/passengers_by_age.js')}}"></script>
+{% endblock %}

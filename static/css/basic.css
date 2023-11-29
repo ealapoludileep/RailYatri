@@ -124,5 +124,5 @@ input.danger {
 
 input[type=submit] {
     align-self: start;
-    width: 64px;
+    width: 128px;
 }

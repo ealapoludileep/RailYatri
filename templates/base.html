@@ -28,7 +28,14 @@
             >Train Passengers</a
           >
         </li>
-        <li><a>Passengers by age</a></li>
+        <li>
+          <a href="{{ url_for('railway.get_passengers_by_age') }}"
+            >Passengers by age</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('railway.cancel_ticket') }}">Cacel Ticket</a>
+        </li>
         {# {% if g.user %}
         <li><span>{{ g.user['username'].capitalize() }}</span></li>
         <li><a href="{{ url_for('auth.logout') }}"> Logout </a></li>
@@ -44,5 +51,6 @@
       <div class="flash">{{ message }}</div>
       {% endfor %} {% block content %}{% endblock %}
     </section>
+    {% block javascript %} {% endblock %}
   </body>
 </html>

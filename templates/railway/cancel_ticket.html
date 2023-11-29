@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %} Cancel Ticket {% endblock %}</h1>
+{% endblock %} {% block content %}
+<form method="post">
+  <label for="passanger_ssn">Passenger SSN</label>
+  <input
+    name="passanger_ssn"
+    id="passanger_ssn"
+    value="{{ request.form['passanger_ssn'] }}"
+    required
+    placeholder="Please enter the SSN of the passanger"
+  />
+  <label for="train_name">Select Train</label>
+  <select name="train_name" id="train_name" value="{{ train_name }}" required>
+    {% for train in trains %}
+    <option value="{{train.train_name}}">{{train.train_name}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Cancle Ticket" width="48px" />
+</form>
+{% if found_passanger and post_request%}
+<div>
+  {{cancled_passanger[0].first_name }} {{cancled_passanger[0].last_name}}'s
+  Ticket for {{train_name}} is cancelled
+</div>
+{% if found_next_passanger %}
+<div>
+  {{passanger[0].first_name}} {{ passanger[0].last_name}}'s Ticket status has
+  changed from waitlist to confirmed for {{train_name}}
+</div>
+{% else %}
+<div>There are not passengers in waitlist for {{train_name}} Train.</div>
+{% endif %} {% elif not found_passanger and post_request %}
+<div>
+  There is no passenger with SSN {{request.form['passanger_ssn']}} in the
+  {{train_name}}
+</div>
+{% endif %}
+<button id="reset-db">Reset Database</button>
+{% endblock %} {% block javascript %}
+<script src="{{url_for('static', filename='js/cancel_ticket.js')}}"></script>
+{% endblock %}

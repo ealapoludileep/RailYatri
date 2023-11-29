@@ -27,7 +27,7 @@ def trains_init():
         for line in f.readlines()[1:]:
             data = line.strip().split(',')
             db.execute('INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(?,?,?,?,?,?);',
-                       (int(data[0]),data[1], float(data[2]), float(data[3]), data[4], data[5]))
+                       (int(data[0]), data[1], float(data[2]), float(data[3]), data[4], data[5]))
             file.write(
                 f'INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES({int(data[0])},{data[1]},{float(data[2])},{float(data[3])},{data[4]},{data[5]});')
             file.write('\n')
@@ -58,10 +58,16 @@ def passengers_init():
         file = open('rrs.sql', 'a')
         for line in f.readlines()[1:]:
             data = line.strip().split(',')
+            date = data[7].split('/')
+            if int(date[2]) > 23:
+                date[2] = '19' + date[2]
+            else:
+                date[2] = '20' + date[2]
+            data[7] = "/".join(date)
             db.execute('INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES (?,?,?,?,?,?,?,?);',
-                       (data[0], data[1], data[2], data[3], data[4], data[5], data[6], datetime.datetime.strptime(data[7], '%m/%d/%y')))
+                       (data[0], data[1], data[2], data[3], data[4], data[5], data[6], datetime.datetime.strptime(data[7], '%m/%d/%Y').date()))
             file.write('INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES ({0},{1},{2},{3},{4},{5},{6},{7});'.format(
-                data[0], data[1], data[2], data[3], data[4], data[5], data[6], datetime.datetime.strptime(data[7], '%m/%d/%y')))
+                data[0], data[1], data[2], data[3], data[4], data[5], data[6], datetime.datetime.strptime(data[7], '%m/%d/%Y').date()))
             file.write('\n')
         file.write('\n')
         db.commit()

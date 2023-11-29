@@ -56,4 +56,16 @@ CREATE TABLE Bookings (
 
 -- SELECT DISTINCT(train_name) FROM Trains;
 
-SELECT * FROM Bookings AS b INNER JOIN Passengers AS p ON b.passanger_ssn = p.ssn WHERE b.train_Number in (SELECT train_number FROM Trains WHERE train_name = 'Golden Chariot') AND b.staus = 'Booked' ORDER BY b.train_number;
+-- SELECT * FROM Bookings AS b INNER JOIN Passengers AS p ON b.passanger_ssn = p.ssn WHERE b.train_Number in (SELECT train_number FROM Trains WHERE train_name = 'Golden Chariot') AND b.staus = 'Booked' ORDER BY b.train_number;
+
+-- SELECT * FROM Bookings WHERE passanger_ssn = '' AND train_Number in (SELECT train_id FROM Trains WHERE train_name = '');
+
+-- DELETE FROM Bookings WHERE passger_ssn = '' AND train_Number in  (SELECT train_id FROM Trains WHERE train_name = '');
+
+-- SELECT passenger_ssn FROM Bookings WHERE train_Number in  (SELECT train_id FROM Trains WHERE train_name = '') and staus = 'WaitL' LIMIT 1;
+
+-- UPDATE Bookings SET staus = 'Booked' WHERE passenger_ssn = ? AND train_Number in  (SELECT train_id FROM Trains WHERE train_name =  ?)
+
+-- SELECT * FROM Passengers WHERE ssn = ?;
+
+-- SELECT t.train_number,t.train_name, t.source_station, t.destination_station, CONCAT(p.first_name, ' ', p.last_name) as Name, p.address, b.ticket_Type as category, b.staus as status, DATEDIFF(hour,p.bdate,GETDATE())/8766 AS age FROM Trains AS t JOIN Bookings AS b ON b.train_Number = t.train_number Join Passengers AS p ON p.ssn = b.passanger_ssn WHERE age BETWEEN ? AND ? ORDER BY age; 
