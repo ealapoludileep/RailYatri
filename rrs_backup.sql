@@ -3,7 +3,7 @@ CREATE TABLE Bookings (
     passanger_ssn VARCHAR(255) NOT NULL,
     train_Number INT NOT NULL,
     ticket_Type VARCHAR(255) NOT NULL,
-    staus VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
     FOREIGN KEY (passanger_ssn) REFERENCES Passengers(ssn),
     FOREIGN KEY (train_Number) REFERENCES Trains(train_number)
 );

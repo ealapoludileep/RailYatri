@@ -38,10 +38,40 @@ CREATE TABLE Bookings (
     passanger_ssn VARCHAR(255) NOT NULL,
     train_Number INT NOT NULL,
     ticket_Type VARCHAR(255) NOT NULL,
-    staus VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
     FOREIGN KEY (passanger_ssn) REFERENCES Passengers(ssn),
     FOREIGN KEY (train_Number) REFERENCES Trains(train_number)
-);
+);
+
+-- Question 2 Subquery
+-- SELECT t.train_number FROM Trains_Status AS ts JOIN Trains AS t ON ts.train_name = t.train_name WHERE ts.train_date = '2022-02-19';
+
+-- Question 2
+-- SELECT (p.first_name|| " "||p.last_name) AS full_name FROM Bookings AS b JOIN Trains as t ON b.train_Number = t.train_number JOIN Passengers as p ON p.ssn = b.passanger_ssn WHERE b.status = 'Booked' AND t.train_number in (SELECT t.train_number FROM Trains_Status AS ts JOIN Trains AS t ON ts.train_name = t.train_name WHERE ts.train_date = '2022-02-19');
+
+-- Question 3
+-- SELECT t.train_number,t.train_name, t.source_station, t.destination_station, p.first_name, p.last_name, p.address, b.ticket_Type as category, b.status as status, cast(strftime('%Y', 'now') - strftime('%Y', bdate) as int)  AS age FROM Trains AS t JOIN Bookings AS b ON b.train_Number = t.train_number Join Passengers AS p ON p.ssn = b.passanger_ssn WHERE age BETWEEN 50 AND 60 ORDER BY age;
+
+-- Question 1
+-- SELECT DISTINCT(t.train_name) FROM (Passengers as p INNER JOIN Bookings AS b ON p.ssn = b.passanger_ssn) INNER JOIN Trains AS t ON b.train_Number = t.train_number WHERE p.first_name = '' AND p.last_name = '';
+
+-- Question 4
+-- SELECT train_name, train_date, (premium_seats_occupied+general_seats_occupied) AS passengers_count FROM Trains_Status;
+
+-- Question 5
+-- SELECT (p.first_name ||' ' || p.last_name) AS full_name FROM Passengers as p JOIN Bookings as b ON p.ssn = b.passanger_ssn JOIN Train as t ON b.train_Number = t.train_number WHERE t.train_name = '' AND b.status = 'Booked';
+
+-- Question 6 Get passgener details
+SELECT * FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
+
+-- Question 6 Delete passgener booking if exists
+DELETE FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
+
+-- Question 6 get next passenger on wailtlist
+SELECT * FROM Bookings WHERE status = 'WaitL' AND train_Number = '' AND ticket_Type = 'Premium' LIMIT 1;
+
+-- Question 6 update next passenger on wailtlist
+UPDATE Bookings SET status = "Booked" WHERE status = 'WaitL' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
 INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(1,Orient Express,800.0,600.0,Paris,Istanbul);
 INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(2,Flying Scottsman,4000.0,3500.0,Edinburgh,London);
 INSERT INTO Trains(train_number,train_name,premium_fair,general_fair,source_station,destination_station) VALUES(3,Golden Arrow,980.0,860.0,Victoria,Dover);
@@ -77,29 +107,29 @@ INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate)
 INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES (Yuki,Whobrey,1 State Route 27,Taylor,Wayne,313-341-4470,294860856,1985-02-25);
 INSERT INTO Passengers(first_name,last_name,address,city,county,phone,ssn,bdate) VALUES (Fletcher,Flosi,394 Manchester Blvd,Rockford,Winnebago,815-426-5657,317434088,1961-04-04);
 
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (264816896,3,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (240471168,2,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (285200976,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (285200976,2,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (317434088,2,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (310908858,2,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (322273872,2,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (256558303,3,Premium,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (302548590,2,General,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (284965676,3,Premium,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (277292710,3,General,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (331160133,3,General,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (331293204,3,General,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (290123298,3,General,WaitL);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (286411536,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (294860856,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (317434088,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (310908858,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (322273872,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (256558303,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (302548590,4,Premium,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (284965676,4,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (277292710,4,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (331160133,4,General,Booked);
-INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (331293204,4,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (264816896,3,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (240471168,2,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (285200976,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (285200976,2,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (317434088,2,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (310908858,2,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (322273872,2,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (256558303,3,Premium,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (302548590,2,General,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (284965676,3,Premium,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (277292710,3,General,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (331160133,3,General,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (331293204,3,General,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (290123298,3,General,WaitL);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (286411536,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (294860856,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (317434088,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (310908858,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (322273872,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (256558303,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (302548590,4,Premium,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (284965676,4,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (277292710,4,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (331160133,4,General,Booked);
+INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (331293204,4,General,Booked);
 

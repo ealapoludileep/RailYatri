@@ -3,15 +3,23 @@
 {% endblock %} {% block content %}
 <form method="post">
   <label for="train_name">Select Train</label>
-  <select name="train_name" id="train_name" value="{{ train_name }}" required>
+  <select
+    name="train_name"
+    id="train_name"
+    required
+  >
     {% for train in trains %}
-    <option value="{{train.train_name}}">{{train.train_name}}</option>
+    <option value="{{train.train_name}}" {% if train.train_name == train_name %} selected="selected"{% endif %}>{{train.train_name}}</option>
     {% endfor %}
   </select>
   <input type="submit" value="Search" />
 </form>
-{% if train_passengers|length >= 1 %} {% for passanger in train_passengers %}
-<div><b>Name:</b> {{passanger.first_name}} {{passanger.last_name}}</div>
+{% if train_passengers|length >= 1 %}
+<div>
+  <b>Passenger with confirmed ticket on {{train_name}} train are:</b>
+</div>
+{% for passanger in train_passengers %}
+<div><b>Name:</b> {{passanger.full_name}}</div>
 {% endfor %} {% else %}
 <div>There are no confirmed passangers on <b>{{train_name}}</b></div>
 {% endif %} {% endblock %}

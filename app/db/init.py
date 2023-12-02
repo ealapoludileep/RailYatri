@@ -80,9 +80,9 @@ def bookings_init():
         file = open('rrs.sql', 'a')
         for line in f.readlines()[1:]:
             data = line.strip().split(',')
-            db.execute('INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES (?,?,?,?);',
+            db.execute('INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES (?,?,?,?);',
                        (data[0], int(data[1]), data[2], data[3]))
-            file.write('INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,staus) VALUES ({},{},{},{});'.format(
+            file.write('INSERT INTO Bookings(passanger_ssn,train_Number,ticket_Type,status) VALUES ({},{},{},{});'.format(
                 data[0], int(data[1]), data[2], data[3]))
             file.write('\n')
         file.write('\n')

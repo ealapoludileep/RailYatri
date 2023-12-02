@@ -5,7 +5,6 @@
 {% for train in train_list %}
 <div>
   <b>Train Name:</b> {{train.train_name}} |
-  <b>passenger Count:</b> {{train.premium_seats_occupied +
-  train.general_seats_occupied}}
+  <b>passenger Count:</b> {{train.passengers_count}}
 </div>
 {% endfor %} {% endfor %} {% endblock %}

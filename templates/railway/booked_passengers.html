@@ -13,12 +13,10 @@
   />
   <input type="submit" value="Search" />
 </form>
-{% if passengers|length >= 1 %} {% for passenger in passengers %}
-<div>
-  <b>Name:</b> {{passenger.first_name}} {{passenger.last_name}} |
-  <b>Train: </b> {{passenger.train_name}} | <b>Date: </b> {{date}} |
-  <b>Status: </b> {{passenger.staus}}
-</div>
+{% if passengers|length >= 1 %}
+<div><b>Paggengers traevelling on {{date}} are: </b></div>
+{% for passenger in passengers %}
+<div><b>Name:</b> {{passenger.full_name}}</div>
 {% endfor %} {% else %}
 <div>There are no passangers on {{date}}</div>
 {% endif %} {% endblock %}

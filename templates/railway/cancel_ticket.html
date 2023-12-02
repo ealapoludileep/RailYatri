@@ -10,30 +10,34 @@
     required
     placeholder="Please enter the SSN of the passanger"
   />
-  <label for="train_name">Select Train</label>
-  <select name="train_name" id="train_name" value="{{ train_name }}" required>
+  <label for="train_number">Select Train</label>
+  <select name="train_number" id="train_number" required>
     {% for train in trains %}
-    <option value="{{train.train_name}}">{{train.train_name}}</option>
+    <option value="{{train.train_number}}" {% if train.train_name == train_name %}selected="selected"{% endif %}>{{train.train_name}}</option>
     {% endfor %}
+  </select>
+  <select name="ticket_type" id="ticket_type" required>
+    <option value="Premium" {% if "Premium" == ticket_type %}selected="selected"{% endif %}>Premium</option>
+    <option value="General" {% if "General" == ticket_type %}selected="selected"{% endif %}>General</option>
   </select>
   <input type="submit" value="Cancle Ticket" width="48px" />
 </form>
 {% if found_passanger and post_request%}
 <div>
   {{cancled_passanger[0].first_name }} {{cancled_passanger[0].last_name}}'s
-  Ticket for {{train_name}} is cancelled
+  {{ticket_type}} Ticket for {{train_name}}  is cancelled
 </div>
 {% if found_next_passanger %}
 <div>
-  {{passanger[0].first_name}} {{ passanger[0].last_name}}'s Ticket status has
+  {{passanger[0].first_name}} {{ passanger[0].last_name}}'s {{ticket_type}} Ticket status has
   changed from waitlist to confirmed for {{train_name}}
 </div>
 {% else %}
-<div>There are not passengers in waitlist for {{train_name}} Train.</div>
+<div>There are not passengers in waitlist for {{train_name}} Train for {{ticket_type}} Ticket Category.</div>
 {% endif %} {% elif not found_passanger and post_request %}
 <div>
   There is no passenger with SSN {{request.form['passanger_ssn']}} in the
-  {{train_name}}
+  {{train_name}} with {{ticket_type}} Ticket Category
 </div>
 {% endif %}
 <button id="reset-db">Reset Database</button>

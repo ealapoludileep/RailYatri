@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Rail Yatri</title>
+    <title>RRS</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/basic.css') }}"
@@ -10,7 +10,7 @@
   </head>
   <body>
     <nav>
-      <h1>Rail Yatri</h1>
+      <h1>RRS</h1>
       <ul>
         <li>
           <a href="{{ url_for('railway.booked_trains') }}">Train Bokkings</a>
@@ -21,16 +21,16 @@
           >
         </li>
         <li>
+          <a href="{{ url_for('railway.get_passengers_by_age') }}"
+            >Passengers by age</a
+          >
+        </li>
+        <li>
           <a href="{{ url_for('railway.get_train_status')}}">Trains Status</a>
         </li>
         <li>
           <a href="{{ url_for('railway.get_train_passengers')}}"
             >Train Passengers</a
-          >
-        </li>
-        <li>
-          <a href="{{ url_for('railway.get_passengers_by_age') }}"
-            >Passengers by age</a
           >
         </li>
         <li>
