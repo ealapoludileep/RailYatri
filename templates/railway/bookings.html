@@ -22,26 +22,22 @@
 </form>
 {% if last_name != '' and first_name != '' and trains|length >= 1 %}
 <div>
-  <b>
-    Trains booked by {{request.form['first_name']}}
-    {{request.form['last_name']}} are:</b
-  >
+  Trains booked by
+  <b>{{request.form['first_name']}} {{request.form['last_name']}} are:</b>
 </div>
 {% for train in trains %}
 <div>Train Name: {{train.train_name}}</div>
 {% endfor %} {% elif last_name != '' and first_name != '' and trains|length == 0
 %}
 <div>
-  <b>
-    {{request.form['first_name']}} {{request.form['last_name']}} is not
-    traevelling in any of the trains.</b
-  >
+  <b> {{request.form['first_name']}} {{request.form['last_name']}}</b> is not
+  traevelling in any of the trains.
 </div>
 {%else%}
 <div>
   <b
-    >Enter the name of the passenger and click search to see wich train they
-    have booked</b
+    >Enter the name of the passenger and click search to see which train they
+    have booked tickets</b
   >
 </div>
 {%endif%}{% endblock %}
