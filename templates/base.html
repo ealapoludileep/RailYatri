@@ -28,7 +28,7 @@
           >
         </li>
         <li>
-          <a href="{{ url_for('railway.get_train_status')}}">Trains Status</a>
+          <a href="{{ url_for('railway.get_train_status')}}">Train Status</a>
         </li>
         <li>
           <a href="{{ url_for('railway.get_train_passengers')}}"
@@ -38,13 +38,6 @@
         <li>
           <a href="{{ url_for('railway.cancel_ticket') }}">Cacel Ticket</a>
         </li>
-        {# {% if g.user %}
-        <li><span>{{ g.user['username'].capitalize() }}</span></li>
-        <li><a href="{{ url_for('auth.logout') }}"> Logout </a></li>
-        {% else%}
-        <li><a href="{{ url_for('auth.register') }}"> Register </a></li>
-        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-        {% endif %} #}
       </ul>
     </nav>
     <section class="content">

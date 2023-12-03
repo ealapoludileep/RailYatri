@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block header %}
-<h1>{% block title %} Trains Status {% endblock %}</h1>
+<h1>{% block title %} Train Status {% endblock %}</h1>
 {% endblock %} {% block content %} {% for date,train_list in trains.items() %}
 <h3>{{date}}</h3>
 {% for train in train_list %}
