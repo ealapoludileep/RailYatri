@@ -4,7 +4,7 @@ A railway management system. It can help you track your tickets and train schedu
 
 ## How to run up the server
 
-Step 1: Dowload the ZIP folder of the code and extract it.
+Step 1: Download the ZIP folder of the code and extract it.
 
 Step 2: CD into the extracted folder
 
@@ -34,7 +34,7 @@ Step 7: Run the app
 flass --app app run --host=0.0.0.0
 ```
 
-Optional Step: IF you want to run the app in debug mode
+Optional Step: If you want to run the app in debug mode run by add --debug option
 
 ```console
 flask --app app --debug --host=0.0.0.0
