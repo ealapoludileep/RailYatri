@@ -31,13 +31,13 @@ flask --app app init-db
 Step 7: Run the app
 
 ```console
-flass --app app run --host=0.0.0.0
+flask --app app run --host=0.0.0.0
 ```
 
 Optional Step: If you want to run the app in debug mode run by add --debug option
 
 ```console
-flask --app app --debug --host=0.0.0.0
+flask --app app run --debug --host=0.0.0.0
 ```
 
 ## Database Schema
