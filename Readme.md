@@ -1,4 +1,4 @@
-# RRS(Railway Reserveation System)
+# RRS(Railway Reservation System)
 
 A railway management system. It can help you track your tickets and train schedules.
 
