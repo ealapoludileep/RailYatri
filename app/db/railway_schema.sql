@@ -62,13 +62,13 @@ CREATE TABLE Bookings (
 -- SELECT (p.first_name ||' ' || p.last_name) AS full_name FROM Passengers as p JOIN Bookings as b ON p.ssn = b.passanger_ssn JOIN Train as t ON b.train_Number = t.train_number WHERE t.train_name = '' AND b.status = 'Booked';
 
 -- Question 6 Get passgener details
-SELECT * FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
+-- SELECT * FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
 
 -- Question 6 Delete passgener booking if exists
-DELETE FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
+-- DELETE FROM Bookings WHERE status = 'Booked' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
 
 -- Question 6 get next passenger on wailtlist
-SELECT * FROM Bookings WHERE status = 'WaitL' AND train_Number = '' AND ticket_Type = 'Premium' LIMIT 1;
+-- SELECT * FROM Bookings WHERE status = 'WaitL' AND train_Number = '' AND ticket_Type = 'Premium' LIMIT 1;
 
 -- Question 6 update next passenger on wailtlist
-UPDATE Bookings SET status = "Booked" WHERE status = 'WaitL' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
+-- UPDATE Bookings SET status = "Booked" WHERE status = 'WaitL' AND passanger_ssn = '' AND train_Number = '' AND ticket_Type = '';
